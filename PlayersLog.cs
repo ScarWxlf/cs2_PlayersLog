@@ -27,13 +27,13 @@ public class PlayersLog : BasePlugin
     }
 
     [GameEventHandler]
-    public HookResult OnPlayerConnect(EventPlayerConnect @event, CCSPlayerController? player)
+    public HookResult OnPlayerConnect(EventPlayerConnect @event, GameEventInfo info, CCSPlayerController? player)
     {
         var playerName = @event.Name;
         var isAdmin = AdminManager.PlayerHasPermissions(player, "@css/generic");
         var data = DateTime.Now.ToString("M:MM:yyyy");
         var time = DateTime.Now.ToString("HH:mm:ss");
-        var path = "./PlayersLog.txt";
+        var path = "PlayersLog.txt";
         var text = isAdmin ? $"Admin {playerName} connected, data:[{data}], time:[{time}]" : $"{playerName} connected, data:[{data}], time:[{time}]";
         if (!File.Exists(path))
             File.Create(path).Close();
@@ -42,13 +42,13 @@ public class PlayersLog : BasePlugin
     }
 
     [GameEventHandler]
-    public HookResult OnPlayerDisconnect(EventPlayerConnect @event, CCSPlayerController? player)
+    public HookResult OnPlayerDisconnect(EventPlayerConnect @event, GameEventInfo info, CCSPlayerController? player)
     {
         var playerName = @event.Name;
         var isAdmin = AdminManager.PlayerHasPermissions(player, "@css/generic");
         var data = DateTime.Now.ToString("M:MM:yyyy");
         var time = DateTime.Now.ToString("HH:mm:ss");
-        var path = "./PlayersLog.txt";
+        var path = "PlayersLog.txt";
         var text = isAdmin ? $"Admin {playerName} disconnected, data:[{data}], time:[{time}]" : $"{playerName} disconnected, data:[{data}], time:[{time}]";
         if (!File.Exists(path))
             File.Create(path).Close();
